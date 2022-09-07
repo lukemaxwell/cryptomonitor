@@ -1,7 +1,7 @@
 """
 Defines a per-domain rate limiter to be used with aiohttp client session.
 
-Adapted from: 
+Adapted from:
 https://stackoverflow.com/questions/49708101/aiohttp-rate-limiting-requests-per-second-by-domain
 """
 import asyncio

@@ -1,10 +1,8 @@
 import asyncio
 import logging
-import re
 from typing import Awaitable, List
 
 import aiohttp
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from cryptomonitor import schemas
 from cryptomonitor.config import HEADERS
@@ -79,7 +77,8 @@ async def fetch_pending_articles():
     """
     Fetch pending article jobs
 
-    The method first checks to determine that there are no currently processing article jobs.
+    The method first checks to determine that there are no currently
+    processing article jobs.
     """
     pending_article_jobs = None
     async with async_session() as db_session:

@@ -1,14 +1,11 @@
 import asyncio
 import logging
-import re
 from datetime import datetime
 from time import mktime
 from typing import Awaitable, List
-from venv import create
 
 import aiohttp
 import feedparser
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from cryptomonitor import schemas
 from cryptomonitor.config import HEADERS

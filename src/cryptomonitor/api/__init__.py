@@ -2,7 +2,6 @@ import asyncio
 
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.sql import insert
 
 from cryptomonitor import schemas
 from cryptomonitor.database import engine, fixtures, get_session, models

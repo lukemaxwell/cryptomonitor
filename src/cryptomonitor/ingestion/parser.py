@@ -1,6 +1,5 @@
 import logging
 from datetime import datetime
-from email import feedparser
 from time import mktime
 from typing import List
 

@@ -1,4 +1,3 @@
-from datetime import datetime, timedelta
 from typing import List
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -104,8 +103,9 @@ async def get_pending_article_jobs(db_session: AsyncSession, limit: int = 10):
     Get pending article jobs
 
     TODO: use window query to get n rows per feed id
-    This would be superior to the rate limiter as it would minimise rate limiting and maximise
-    the number or async requests that could be made in parallel
+    This would be superior to the rate limiter as it would minimise
+    rate limiting and maximise the number of async requests that could be
+    made in parallel
     """
     return await get_article_jobs_by_status(
         db_session=db_session, status=schemas.ArticleJobStatus.pending
