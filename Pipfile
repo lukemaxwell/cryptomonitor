@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+yarl = "*"
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+sqlalchemy = {extras = ["ascyncio"], version = "*"}
+aiohttp = {extras = ["speedups"], version = "*"}
+feedparser = "*"
+beautifulsoup4 = "*"
+asyncpg = "*"
+
+[dev-packages]
+black = "*"
+flake8 = "*"
+isort = "*"
+
+[requires]
+python_version = "3.9.5"
+
+[pipenv]
+allow_prereleases = true

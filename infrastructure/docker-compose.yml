@@ -1,0 +1,60 @@
+version: '3.1'
+
+services:
+
+  api:
+    container_name: api
+    # restart: always
+    depends_on:
+      - postgres
+    build: ../
+    command: uvicorn cryptomonitor.api:app --host 0.0.0.0
+    # command: tail -f /dev/null
+    volumes:
+      - ../src/:/cryptomonitor/
+    ports:
+      - 8000:8000
+
+  # feeds:
+  #   container_name: feeds
+  #   build: ../
+  #   # restart: always
+  #   depends_on:
+  #     - api
+  #     - postgres
+  #   # command: tail -f /dev/null
+  #   command: python -m cryptomonitor.ingestion.__init__ feeds
+  #   volumes:
+  #     - ../src/:/cryptomonitor/
+
+  # articles:
+  #   container_name: articles
+  #   build: ../
+  #   depends_on:
+  #     - api
+  #     - postgres
+  #   restart: always
+  #   # command: tail -f /dev/null
+  #   command: python -m cryptomonitor.ingestion.__init__ articles
+  #   volumes:
+  #     - ../src/:/cryptomonitor/
+
+  postgres:
+    container_name: postgres
+    command: postgres -c config_file=/etc/postgresql.conf
+    image: postgres
+    # restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: cryptomonitor
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgresql.conf:/etc/postgresql.conf
+
+  adminer:
+    container_name: admin
+    image: adminer
+    # restart: always
+    ports:
+      - 8080:8080
