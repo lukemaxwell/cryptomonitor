@@ -6,8 +6,7 @@ It checks for new feed content every 10 seconds using a FastAPI background task.
 
 If articles must be fetched from the source website they are queued in the database as ArticleJobs.
 
-Article jobs are checked every 10 seconds and articles are fetched in rate limited fashion (no more than 1 request per host every 5 seconds).
-
+Article jobs are checked every 10 seconds using a seperate background task and articles are fetched in rate limited fashion (no more than 1 request per host every 5 seconds).
 
 Feeds and rules can be configured using the API, and articles can be retrieved using the articles API endpoint, or via the websocket.
 
@@ -57,7 +56,7 @@ closed while tasks are running, the article jobs may be stuck in processing stat
 
 There are no db migrations (e.g. with Alembic).
 
-Async parallelism could be maximised by using window query to get pending jobs. See [here](src/cryptomonitor/database/crud/article.py#103).
+The collecition of articles is inefficient. Async parallelism could be maximised by using window query to get pending jobs. See [here](src/cryptomonitor/database/crud/article.py#103).
 
 There is a runtime warning from aiohttp visible in the logs. This appears to be a known issue with aiohttp https://github.com/aio-libs/aiohttp/issues/4282
 
