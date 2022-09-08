@@ -56,6 +56,10 @@ async def add_fixtures():
                     name="eth-forks-upgrades",
                     pattern=".*((Ethereum)|(ETH)).*((fork)|(upgrad)).*",
                 ),
+                schemas.RuleCreate(
+                    name="bitcoin-broad",
+                    pattern=".*([Bb]itcoin|BTC).*",
+                ),
             ],
         )
         await feed_crud.create_feed_with_rules(db_session=db_session, feed=feed_3)
@@ -105,10 +109,6 @@ async def add_fixtures():
                 schemas.RuleCreate(
                     name="coinbase-binance-listings",
                     pattern=".*((Coinbase)|(Binance)).*list.*",
-                ),
-                schemas.RuleCreate(
-                    name="eth-forks-upgrades",
-                    pattern=".*((Ethereum)|(ETH)).*((fork)|(upgrad)).*",
                 ),
             ],
         )

@@ -1,6 +1,7 @@
 import asyncio
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi.encoders import jsonable_encoder
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from cryptomonitor import schemas
@@ -9,6 +10,7 @@ from cryptomonitor.database.crud import article as article_crud
 from cryptomonitor.database.crud import feed as feed_crud
 from cryptomonitor.database.crud import rule as rule_crud
 from cryptomonitor.ingestion import articles, feeds, task_runner
+from cryptomonitor.listener import global_listener
 
 app = FastAPI()
 
@@ -23,12 +25,20 @@ async def app_startup():
     # Add fixtures
     await fixtures.add_fixtures()
 
+    # Start event listener
+    await global_listener.start_listening()
+
     # Uncomment to run ingestion run using fastapi background tasks,
     # DO NOT RUN 'feed' and 'article' docker containers when doing so
     # Not that it is ideal to have long running background tasks tied to your api thread
     #
     asyncio.create_task(task_runner.run(feeds.fetch_pending_feeds))
     asyncio.create_task(task_runner.run(articles.fetch_pending_articles))
+
+
+@app.on_event("shutdown")
+async def app_shutdown():
+    await global_listener.stop_listening()
 
 
 @app.post("/feeds/", response_model=schemas.Feed)
@@ -105,3 +115,16 @@ async def read_articles_jobs(
 ):
     article_jobs = await article_crud.get_article_jobs(db, skip=skip, limit=limit)
     return article_jobs
+
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket, response_model=models.Article):
+    await websocket.accept()
+    q: asyncio.Queue = asyncio.Queue()
+    await global_listener.subscribe(q=q)
+    try:
+        while True:
+            data = await q.get()
+            await websocket.send_text(jsonable_encoder(data))
+    except WebSocketDisconnect:
+        return

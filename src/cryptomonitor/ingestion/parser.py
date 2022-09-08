@@ -134,11 +134,11 @@ async def parse_entries(
     feed: models.Feed,
     parsed_feed: feedparser.FeedParserDict,
 ):
-    last_article_date = feed.last_article_date
     for entry in parsed_feed["entries"]:
         entry_date = parse_entry_datetime(entry)
-        if is_new_entry(entry_date=entry_date, last_article_date=last_article_date):
-            last_article_date = entry_date
+        if is_new_entry(
+            entry_date=entry_date, last_article_date=feed.last_article_date
+        ):
             if "content" not in entry:
                 await create_article_job(db_session=db_session, feed=feed, entry=entry)
             else:

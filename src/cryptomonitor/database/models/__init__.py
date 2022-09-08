@@ -30,6 +30,9 @@ class Rule(Base):
         "Article", secondary="article_rules", back_populates="rules"
     )
 
+    def to_dict(self) -> dict:
+        return {"id": self.id, "name": self.name, "pattern": self.pattern}
+
 
 class FeedRule(Base):
     __tablename__ = "feed_rules"
@@ -50,6 +53,16 @@ class Article(Base):
         "Rule", secondary="article_rules", back_populates="articles", lazy="selectin"
     )
     feed_id = Column(Integer, ForeignKey("feeds.id"), index=True)
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "title": self.title,
+            "body": self.body,
+            "url": self.url,
+            "published": self.published,
+            "rules": [rule.to_dict() for rule in self.rules],
+        }
 
 
 class ArticleRule(Base):

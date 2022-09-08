@@ -3,6 +3,7 @@ from typing import List
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
+from cryptomonitor.listener import global_listener
 from cryptomonitor import schemas
 from cryptomonitor.database import async_session, models
 
@@ -39,6 +40,7 @@ async def create_article(db_session: AsyncSession, article: schemas.ArticleCreat
     await create_article_rules(
         db_session=db_session, rules=article.rules, article_id=db_article.id
     )
+    await global_listener.receive_and_publish_message(db_article.to_dict())
     return db_article
 
 

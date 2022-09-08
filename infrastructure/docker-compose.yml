@@ -51,6 +51,7 @@ services:
       - 5432:5432
     volumes:
       - ./postgresql.conf:/etc/postgresql.conf
+      - pgdata:/var/lib/postgresql/data
 
   adminer:
     container_name: admin
@@ -58,3 +59,6 @@ services:
     # restart: always
     ports:
       - 8080:8080
+
+volumes:
+  pgdata:
