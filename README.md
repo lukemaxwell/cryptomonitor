@@ -2,7 +2,7 @@
 Cryptomonitor is a demo application designed to monitor crypto news feeds in real time and store articles that match configurable rules.
 
 The application is built using FastAPI and SQLAlchemy (async). 
-It checks for new feed content every 10 seconds using a FastAPI background task seconds.
+It checks for new feed content every 10 seconds using a FastAPI background task.
 
 If articles must be fetched from the source website they are queued in the database as ArticleJobs.
 
