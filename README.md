@@ -22,7 +22,7 @@ There are various options for improvement which were out of scope for this examp
 
 1. Run the feed and article tasks in separate containers. There is an example of this in the docker-compose file. It is a very small improvement and would break the websocket (as the websocket listener is run by the API). An easy fix for this would be to have the article task use the API endpoint to create articles. Slightly more robust, would work with ECS/EKS.
 
-2. Use proper background workers for the task collection, e.g. celery. Much more rebost and better for ongoing collection and debug. At this point the benefit of asynchrounous web request would begin to diminish (or simply add unwanted debug complexity). 
+2. Use proper background workers for the task collection, e.g. celery. Much more rebust and better for ongoing collection and debug. At this point the benefit of asynchrounous web request would begin to diminish (or simply add unwanted debug complexity). 
 
 3. Use a hybrid serverless solution where feed and article tasks are offloaded to lambdas for parallel procesing. Similar benefits to above with opportunity for greater parallelism. 
 
