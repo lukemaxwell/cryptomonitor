@@ -11,9 +11,9 @@ $ docker-compose up -d
 $ docker-compose logs -f api
 ```
 
-API available on [http://localhost:8000](http://localhost:8000)
-Interactive swagger docs available on [http://localhost:8000/docs](http://localhost:8000/docs)
-Adminer is available on [http://localhost:8080]:
+* API: [http://localhost:8000](http://localhost:8000)
+* Interactive swagger: [http://localhost:8000/docs](http://localhost:8000/docs)
+* Adminer: [http://localhost:8080](http://localhost:8080):
     * server: postgres 
     * username:postgres 
     * password:password 
