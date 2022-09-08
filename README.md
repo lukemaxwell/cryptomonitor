@@ -8,7 +8,7 @@ If articles must be fetched from the source website they are queued in the datab
 
 Article jobs are checked every 10 seconds using a seperate background task and articles are fetched in rate limited fashion (no more than 1 request per host every 5 seconds).
 
-Feeds and rules can be configured using the API, and articles can be retrieved using the articles API endpoint, or via the websocket.
+Feeds and rules can be configured using the API, and article body is printed to stdout and the json format can be retrieved using the articles API endpoint, or via the websocket.
 
 The article job queue can also be viewed via the API.
 
