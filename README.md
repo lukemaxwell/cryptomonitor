@@ -37,7 +37,7 @@ $ docker-compose logs -f api
 
 * API: [http://localhost:8000](http://localhost:8000)
 * Interactive swagger: [http://localhost:8000/docs](http://localhost:8000/docs)
-* Adminer: [http://localhost:8080](http://localhost:8080):
+* Adminer: [http://localhost:8080](http://localhost:8080)
     * server: postgres 
     * username:postgres 
     * password:password 
