@@ -42,8 +42,7 @@ $ docker-compose logs -f api
     * username:postgres 
     * password:password 
     * database: cryptomonitor
-* Websocket: [ws://localhost:8000/ws](ws://localhost:8000/ws)
-
+* Websocket: ws://localhost:8000/ws
 
 # Notes
 
