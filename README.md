@@ -16,7 +16,7 @@ The article job queue can also be viewed via the API.
 ## Improvements
 
 ### Architecture
-This is small self-contained application used for the purposes of demonstration, and to see what can be done with FastAPI background tasks. However, doing this volume of background work on the same thread as the server is unwise. 
+This is small self-contained application used for the purposes of demonstration, and to see what can be done with FastAPI background tasks. However, doing this volume of background work in the service that is running the api is unwise. 
 
 There are various options for improvement which were out of scope for this example.
 
