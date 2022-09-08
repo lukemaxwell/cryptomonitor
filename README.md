@@ -55,7 +55,7 @@ closed while tasks are running, the article jobs may be stuck in processing stat
 
 There are no db migrations (e.g. with Alembic).
 
-The collection of articles is inefficient. Async parallelism could be maximised by using window query to get pending jobs. See [here](src/cryptomonitor/database/crud/article.py#103).
+The collection of articles is inefficient. Async parallelism could be maximised by using window query to get pending jobs. See [here](src/cryptomonitor/database/crud/article.py#L107).
 
 There is a runtime warning from aiohttp visible in the logs. This appears to be a known issue with aiohttp https://github.com/aio-libs/aiohttp/issues/4282
 
